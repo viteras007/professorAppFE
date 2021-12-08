@@ -3,7 +3,7 @@
   <mat-toolbar class="navbar">
 
     <div>
-      <img src="../../../assets/images/brain_ico.png" class="imgMenu"/>
+      <img src="../../../assets/images/brain_ico.png" class="imgMenu" />
     </div>
 
 
@@ -15,15 +15,33 @@
 
     <span class="navbar-spacer"></span>
 
-    <button class="btnLogin" mat-stroked-button>Login</button>
+    <button class="btnLogin" (click)="openLogin()" mat-stroked-button>Login</button>
   </mat-toolbar>
 
   <div class="content">
-    <img src="../../../assets/images/brain_ico.png" class="imgLanding"/>
+    <img src="../../../assets/images/brain_ico.png" class="imgLanding" />
   </div>
   <div class="firstText">
     <span>Já pensou em fazer sua prova<br></span>
     <span style="margin-left: 7em;">em apenas alguns cliques?</span>
+  </div>
+  <div class="secondText">
+    <span style="margin-top: 20px;">Crie suas provas de maneira prática e<br>
+      rápida, tendo acesso a um enorme<br>
+      acervo de questões de todas<br>
+      as maneiras.</span>
+    <img src="../../../assets/images/test-png.png" class="imgTest" />
+  </div>
+
+  <div class="thirdText">
+    <img src="../../../assets/images/notebook.png" class="imgNotebook" />
+    <span style="margin-top: 55px;">De maneira rápida e de qualquer<br>
+      lugar é possivel criar suas<br>
+      provas de maneira <br>
+      prática e fácil.</span>
+  </div>
+  <div class="content">
+    <button class="btnComecar" mat-raised-button>Começar</button>
   </div>
 
 </div>

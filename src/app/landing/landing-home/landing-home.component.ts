@@ -1,17 +1,21 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { TimerObservable } from 'rxjs-compat/observable/TimerObservable';
+import { LoginComponent } from 'src/app/auth/login/login.component';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { SpinnerService } from 'src/app/core/services/spinner.service';
+import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
+import { LoginDialogComponent } from 'src/app/shared/login-dialog/login-dialog.component';
 
 @Component({
   selector: 'app-landing-home',
   templateUrl: './landing-home.component.html',
   styleUrls: ['./landing-home.component.css']
 })
-export class LandingHomeComponent implements OnInit, OnDestroy,AfterViewInit {
+export class LandingHomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private _mobileQueryListener: () => void;
     mobileQuery: MediaQueryList;
     showSpinner: boolean;
@@ -24,7 +28,9 @@ export class LandingHomeComponent implements OnInit, OnDestroy,AfterViewInit {
         private media: MediaMatcher,
         public spinnerService: SpinnerService,
         private authService: AuthenticationService,
-        private authGuard: AuthGuard) {
+        private authGuard: AuthGuard,
+        public dialog: MatDialog,
+        ) {
 
         this.mobileQuery = this.media.matchMedia('(max-width: 1000px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -53,5 +59,16 @@ export class LandingHomeComponent implements OnInit, OnDestroy,AfterViewInit {
 
     ngAfterViewInit(): void {
         this.changeDetectorRef.detectChanges();
+    }
+
+    openLogin(): void {
+      const dialogRef = this.dialog.open(LoginDialogComponent, {
+        width: '400px',
+        data: {},
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed', result);
+      });
     }
 }

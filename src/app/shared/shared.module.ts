@@ -10,6 +10,7 @@ import { ContentPlaceholderAnimationComponent } from './content-placeholder-anim
 import { LocalDatePipe } from './pipes/local-date.pipe';
 import { YesNoPipe } from './pipes/yes-no.pipe';
 import { LayoutComponent } from './layout/layout.component';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { LayoutComponent } from './layout/layout.component';
   ],
   declarations: [
     ConfirmDialogComponent,
+    LoginDialogComponent,
     ContentPlaceholderAnimationComponent,
     LimitToPipe,
     LocalDatePipe,
@@ -34,12 +36,14 @@ import { LayoutComponent } from './layout/layout.component';
     CustomMaterialModule,
     LimitToPipe,
     ConfirmDialogComponent,
+    LoginDialogComponent,
     ContentPlaceholderAnimationComponent,
     LocalDatePipe,
     YesNoPipe
   ],
   entryComponents: [
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    LoginDialogComponent
   ]
 })
 export class SharedModule { }
