@@ -1,0 +1,54 @@
+<div>
+    <form [formGroup]="loginForm" fxFlex="30%" fxFlex.sm="50%" fxFlex.xs="90%">
+        <mat-card class="mat-elevation-z0" style="min-width: 315px;">
+            <mat-card-title>Registrar</mat-card-title>
+            <mat-card-subtitle>Crie sua conta e começe a usar agora</mat-card-subtitle>
+            <mat-card-content>
+
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input id="emailInput" matInput placeholder="Email" formControlName="email" autocomplete="email"
+                        type="email">
+
+                    <mat-error id="invalidEmailError" *ngIf="loginForm.controls['email'].hasError('email')">
+                        Digite um email válido
+                    </mat-error>
+                    <mat-error id="requiredEmailError" *ngIf="loginForm.controls['email'].hasError('required')">
+                        Email é
+                        <strong>Obrigatório</strong>
+                    </mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Senha</mat-label>
+                    <input id="passwordInput" matInput placeholder="Senha" formControlName="password" type="password"
+                        autocomplete="current-password">
+                    <mat-error id="requiredPasswordError" *ngIf="loginForm.controls['email'].hasError('required')">
+                        Senha é
+                        <strong>Obrigatório</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- <div class="full-width">
+                <mat-slide-toggle formControlName="rememberMe">Lembrar meu email</mat-slide-toggle>
+            </div> -->
+
+            </mat-card-content>
+
+            <!-- <mat-card-actions class="login-actions" style="display: flex; justify-content: flex-end;">
+
+                <button mat-button id="resetPassword" (click)="resetPassword()" type="button">Redefinir Senha</button>
+            </mat-card-actions> -->
+
+        </mat-card>
+
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    </form>
+</div>
+
+<div mat-dialog-actions style="display: flex; justify-content: space-between;">
+    <button mat-raised-button color="primary" (click)="onLogin()">Voltar para Login</button>
+    <button mat-raised-button id="login" color="primary" [disabled]="loginForm.invalid || loading"
+        (click)="login()">Criar</button>
+</div>

@@ -9,6 +9,7 @@ import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { SpinnerService } from 'src/app/core/services/spinner.service';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { LoginDialogComponent } from 'src/app/shared/login-dialog/login-dialog.component';
+import { RegisterDialogComponent } from 'src/app/shared/register-dialog/register-dialog.component';
 
 @Component({
   selector: 'app-landing-home',
@@ -68,7 +69,22 @@ export class LandingHomeComponent implements OnInit, OnDestroy, AfterViewInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed', result);
+        if (result.register) {
+          this.openRegister();
+        }
+      });
+    }
+
+    openRegister(): void {
+      const dialogRef = this.dialog.open(RegisterDialogComponent, {
+        width: '400px',
+        data: {},
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result.login) {
+          this.openLogin();
+        }
       });
     }
 }

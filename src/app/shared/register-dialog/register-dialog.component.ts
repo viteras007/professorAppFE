@@ -7,11 +7,11 @@ import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
-  selector: 'app-login-dialog',
-  templateUrl: './login-dialog.component.html',
-  styleUrls: ['./login-dialog.component.css'],
+  selector: 'app-register-dialog',
+  templateUrl: './register-dialog.component.html',
+  styleUrls: ['./register-dialog.component.css'],
 })
-export class LoginDialogComponent implements OnInit {
+export class RegisterDialogComponent implements OnInit {
   title: string;
   message: string;
 
@@ -23,7 +23,7 @@ export class LoginDialogComponent implements OnInit {
     private titleService: Title,
     private notificationService: NotificationService,
     private authenticationService: AuthenticationService,
-    public dialogRef: MatDialogRef<LoginDialogComponent>,
+    public dialogRef: MatDialogRef<RegisterDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: LoginDialogModel
   ) {
     this.title = data.title;
@@ -35,9 +35,11 @@ export class LoginDialogComponent implements OnInit {
     // this.authenticationService.logout();
     this.createForm();
   }
-  onRegister(): void {
-    this.dialogRef.close({ register: true });
+
+  onLogin(): void {
+    this.dialogRef.close({login: true});
   }
+
   onConfirm(): void {
     this.dialogRef.close(true);
   }
@@ -91,6 +93,6 @@ export class LoginDialogComponent implements OnInit {
  *
  * It has been kept here to keep it as part of shared component.
  */
-export class LoginDialogModel {
+export class RegisterDialogModel {
   constructor(public title: string, public message: string) {}
 }
