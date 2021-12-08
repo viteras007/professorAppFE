@@ -14,6 +14,11 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
+        path: 'landing',
+        loadChildren: './landing/landing.module#LandingModule',
+        // canActivate: [AuthGuard]
+    },
+    {
         path: 'customers',
         loadChildren: './customers/customers.module#CustomersModule',
         canActivate: [AuthGuard]

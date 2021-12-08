@@ -1,0 +1,29 @@
+<div class="navbar-container" [class.example-is-mobile]="mobileQuery.matches">
+
+  <mat-toolbar class="navbar">
+
+    <div>
+      <img src="../../../assets/images/brain_ico.png" class="imgMenu"/>
+    </div>
+
+
+    <a class="navbar-brand" [routerLink]="['/landing']" matTooltip="Home">
+      <h1>
+        ProfessorApp
+      </h1>
+    </a>
+
+    <span class="navbar-spacer"></span>
+
+    <button class="btnLogin" mat-stroked-button>Login</button>
+  </mat-toolbar>
+
+  <div class="content">
+    <img src="../../../assets/images/brain_ico.png" class="imgLanding"/>
+  </div>
+  <div class="firstText">
+    <span>Já pensou em fazer sua prova<br></span>
+    <span style="margin-left: 7em;">em apenas alguns cliques?</span>
+  </div>
+
+</div>
