@@ -24,7 +24,7 @@ export class RegisterDialogComponent implements OnInit {
     private notificationService: NotificationService,
     private authenticationService: AuthenticationService,
     public dialogRef: MatDialogRef<RegisterDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: LoginDialogModel
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.title = data.title;
     this.message = data.message;
