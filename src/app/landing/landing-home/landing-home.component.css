@@ -71,6 +71,7 @@
   border: 1px solid white !important;
   border-radius: 40px;
   color: #FFFFFF;
+  float: right !important;
 }
 .navbar-brand {
   text-decoration: none;
