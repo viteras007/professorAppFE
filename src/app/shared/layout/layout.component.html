@@ -1,7 +1,7 @@
 <div class="navbar-container" [class.example-is-mobile]="mobileQuery.matches">
 
   <!-- Top navbar -->
-  <mat-toolbar class="navbar" color="primary">
+  <!-- <mat-toolbar class="navbar" color="primary">
 
     <button mat-icon-button (click)="snav.toggle()">
       <mat-icon>menu</mat-icon>
@@ -51,6 +51,31 @@
 
     </mat-menu>
 
+  </mat-toolbar> -->
+
+  <mat-toolbar class="navbar">
+
+    <div>
+      <img src="../../../assets/images/brain_ico.png" class="imgMenu" />
+    </div>
+
+    <span class="navbar-spacer"></span>
+
+    <a class="navbar-brand" [routerLink]="['/dashboard']" matTooltip="ProfessorApp">
+      <h1>
+        ProfessorApp
+      </h1>
+    </a>
+
+    <span class="navbar-spacer"></span>
+
+    <!-- <button class="btnLogin" (click)="openLogin()" mat-stroked-button>Login</button> -->
+
+    <a mat-menu-item [routerLink]="['/account/profile']">
+      <mat-icon class="iconPerson">person</mat-icon>
+      <!-- <span>Account</span> -->
+    </a>
+
   </mat-toolbar>
 
   <mat-sidenav-container class="navbar-sidenav-container">
@@ -59,39 +84,41 @@
       [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" class="sidenav">
 
       <mat-nav-list>
-        <h3 mat-subheader>Home</h3>
-
+        <!-- <h3 mat-subheader>Home</h3> -->
+        
         <a mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active">
           <mat-icon mat-list-icon>
-            dashboard
+            all_inbox
           </mat-icon>
           <p mat-line> Dashboard </p>
         </a>
+        
+        <mat-divider></mat-divider>
 
         <a mat-list-item [routerLink]="['/customers']" routerLinkActive="active">
           <mat-icon mat-list-icon>
-            business
+            mode_edit
           </mat-icon>
-          <p mat-line> Customers </p>
+          <p mat-line> Questões </p>
         </a>
         <a mat-list-item [routerLink]="['/users']" routerLinkActive="active">
           <mat-icon mat-list-icon>
-            people
+            article
           </mat-icon>
-          <p mat-line> Users </p>
+          <p mat-line> Prova </p>
         </a>
 
         <a mat-list-item [routerLink]="['/account/profile']">
           <mat-icon mat-list-icon>person</mat-icon>
-          <p mat-line> Account </p>
+          <p mat-line> Perfil </p>
         </a>
 
         <a mat-list-item [routerLink]="['/landing']">
           <mat-icon mat-list-icon>exit_to_app</mat-icon>
-          <p mat-line> Log out </p>
+          <p mat-line> Sair </p>
         </a>
 
-        <mat-divider></mat-divider>
+        <!-- <mat-divider></mat-divider>
 
         <h3 mat-subheader>Resources</h3>
 
@@ -120,7 +147,7 @@
             info_outline
           </mat-icon>
           <p mat-line> About </p>
-        </a>
+        </a> -->
       </mat-nav-list>
 
     </mat-sidenav>

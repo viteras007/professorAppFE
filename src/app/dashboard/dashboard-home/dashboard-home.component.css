@@ -15,3 +15,6 @@
   max-height: 400px;
   overflow: auto;
 }
+.dashboardWelcome {
+  font-size: 36px;
+}
