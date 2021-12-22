@@ -46,9 +46,11 @@
 
         </mat-card>
 
-        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
     </form>
 </div>
+
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
 
 <div mat-dialog-actions style="display: flex; justify-content: space-between;">
     <button mat-raised-button color="primary" (click)="onRegister()">Registrar</button>
