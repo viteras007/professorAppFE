@@ -12,7 +12,8 @@ import { YesNoPipe } from './pipes/yes-no.pipe';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
-
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { QuestionService } from './services/question.service';
 @NgModule({
   imports: [
     RouterModule,
@@ -20,6 +21,7 @@ import { RegisterDialogComponent } from './register-dialog/register-dialog.compo
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    HttpClientModule,
   ],
   declarations: [
     ConfirmDialogComponent,
@@ -48,6 +50,9 @@ import { RegisterDialogComponent } from './register-dialog/register-dialog.compo
     ConfirmDialogComponent,
     LoginDialogComponent,
     RegisterDialogComponent
-  ]
+  ],
+  providers: [QuestionService, {provide: HTTP_INTERCEPTORS,
+    useClass: null,
+    multi : true}],
 })
 export class SharedModule { }
