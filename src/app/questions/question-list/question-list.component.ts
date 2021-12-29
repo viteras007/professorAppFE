@@ -5,6 +5,9 @@ import { NGXLogger } from 'ngx-logger';
 import { Title } from '@angular/platform-browser';
 
 import { NotificationService } from '../../core/services/notification.service';
+import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators';
 
 export interface PeriodicElement {
   name: string;
@@ -28,14 +31,23 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 @Component({
   selector: 'app-customer-list',
-  templateUrl: './customer-list.component.html',
-  styleUrls: ['./customer-list.component.css']
+  templateUrl: './question-list.component.html',
+  styleUrls: ['./question-list.component.css']
 })
 export class CustomerListComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  askSelected = 'option0';
+  subcjetSelected = 'option0';
+  themeSelected = 'option0';
+  levelSelected = 'option0';
+  typeSelected = 'option0';
+  myControl = new FormControl();
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredOptions: Observable<string[]>;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+
 
   constructor(
     private logger: NGXLogger,
@@ -47,6 +59,15 @@ export class CustomerListComponent implements OnInit {
     this.titleService.setTitle('angular-material-template - Customers');
     this.logger.log('Customers loaded');
     this.dataSource.sort = this.sort;
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value)),
+    );
+  }
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 }
