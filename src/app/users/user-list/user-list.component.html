@@ -1,19 +1,74 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center none">
   <div fxFlex="95%">
 
+    <h2>Prova</h2>
+
+    <div>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>N° questões</mat-label>
+        <input type="text" placeholder="" aria-label="Number" matInput>
+      </mat-form-field>
+    </div>
+
     <mat-card>
       <mat-card-content>
-        <h2>Users</h2>
-
-
-        <div class="container" fxLayout="row" fxLayoutAlign="center none">
-          <div fxFlex="50%" class="text-center no-records animate">
-            <mat-icon>people_outline</mat-icon>
-            <p>No users exist.</p>
-          </div>
-          <mat-icon> </mat-icon>
+        <div class="container" fxLayout="row" fxLayoutAlign="none">
+          <div class="no-records animate">Questão {{1}}</div>
+          <mat-icon>keyboard_arrow_down</mat-icon>
         </div>
 
+        <div class="filters">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Pergunta</mat-label>
+            <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+              [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Disciplina</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option value="option0">None</mat-option>
+              <mat-option value="option1">História</mat-option>
+              <mat-option value="option2">Geografia</mat-option>
+              <mat-option value="option3">Matemática</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Tema</mat-label>
+            <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+              [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nível</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option value="option0">None</mat-option>
+              <mat-option value="option1">Fácil</mat-option>
+              <mat-option value="option2">Médio</mat-option>
+              <mat-option value="option3">Díficil</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option value="option0">None</mat-option>
+              <mat-option value="option1">Aberta</mat-option>
+              <mat-option value="option2">Fechada</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </mat-card-content>
     </mat-card>
 
