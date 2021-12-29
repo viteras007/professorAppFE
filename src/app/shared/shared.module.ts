@@ -51,8 +51,6 @@ import { QuestionService } from './services/question.service';
     LoginDialogComponent,
     RegisterDialogComponent
   ],
-  providers: [QuestionService, {provide: HTTP_INTERCEPTORS,
-    useClass: null,
-    multi : true}],
+  providers: [QuestionService],
 })
 export class SharedModule { }

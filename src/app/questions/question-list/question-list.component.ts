@@ -8,6 +8,7 @@ import { NotificationService } from '../../core/services/notification.service';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
+import { QuestionService } from 'src/app/shared/services/question.service';
 
 export interface PeriodicElement {
   name: string;
@@ -35,8 +36,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./question-list.component.css']
 })
 export class CustomerListComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns: string[] = ['pergunta', 'disciplina', 'tema', 'nivel', 'tipo', 'actions'];
+  // displayedColumns: string[] = ['id', 'pergunta']; // 'disciplina', 'tema', 'nivel', 'tipo', 'actions'];
+  dataSource = new MatTableDataSource([]);
   askSelected = 'option0';
   subcjetSelected = 'option0';
   themeSelected = 'option0';
@@ -52,10 +54,12 @@ export class CustomerListComponent implements OnInit {
   constructor(
     private logger: NGXLogger,
     private notificationService: NotificationService,
-    private titleService: Title
+    private titleService: Title,
+    private questionService: QuestionService
   ) { }
 
   ngOnInit() {
+    this.getAllData();
     this.titleService.setTitle('angular-material-template - Customers');
     this.logger.log('Customers loaded');
     this.dataSource.sort = this.sort;
@@ -65,6 +69,20 @@ export class CustomerListComponent implements OnInit {
     );
   }
 
+  getAllData() {
+    this.questionService.getAll().subscribe(
+      data => {
+          if (data) {
+            console.log('DEU BOM', data);
+            this.dataSource = data;
+          } else {
+            console.log('DEU RUIM');
+          }
+        },
+        error => {
+          console.log(error);
+        });
+  }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
