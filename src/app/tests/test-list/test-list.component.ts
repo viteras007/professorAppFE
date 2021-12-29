@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  selector: 'app-test-list',
+  templateUrl: './test-list.component.html',
+  styleUrls: ['./test-list.component.css']
 })
 export class UserListComponent implements OnInit {
   askSelected = 'option0';
