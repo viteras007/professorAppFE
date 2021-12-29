@@ -1,0 +1,27 @@
+table {
+    width: 100%;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+mat-dialog-actions, align{
+    justify-content: flex-end;
+}
+
+mat-raised-button{
+    border-radius: 33px;
+}
+
+.filters{
+    display: flex;
+    justify-content: space-between;
+}
+
+@media only screen and (max-device-width: 1200px) {
+    .filters{
+        display: block;
+        justify-content: space-between;
+    }
+ }
