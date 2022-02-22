@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { NotificationService } from '../../core/services/notification.service';
 import { NGXLogger } from 'ngx-logger';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -13,18 +12,22 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./test-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  askSelected = 'option0';
-  subcjetSelected = 'option0';
-  themeSelected = 'option0';
-  levelSelected = 'option0';
-  typeSelected = 'option0';
-  myControl = new FormControl();
+  askSelected: string = 'option0';
+  subcjetSelected: string = 'option0';
+  themeSelected: string = 'option0';
+  levelSelected: string = 'option0';
+  typeSelected: string = 'option0';
+  questionsCount: number = 0;
+  myControl: FormControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
 
+  emitNewQuestion = new EventEmitter<string>();
+  static createdNewQuestion = new EventEmitter<string>();
+  questionsquantity: string[] = [];
+
   constructor(
     private logger: NGXLogger,
-    private notificationService: NotificationService,
     private titleService: Title
   ) { }
 
@@ -41,5 +44,19 @@ export class UserListComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  addQuestion(quantity: string) {
+    this.questionsquantity.push(quantity);
+    this.emitNewQuestion.emit(quantity);
+    UserListComponent.createdNewQuestion.emit(quantity);
+    this.questionsCount = this.questionsquantity.length;
+  }
+
+  removeQuestion(quantity: string) {
+    this.questionsquantity.pop();
+    this.emitNewQuestion.emit(quantity);
+    UserListComponent.createdNewQuestion.emit(quantity);
+    this.questionsCount = this.questionsquantity.length;
   }
 }
