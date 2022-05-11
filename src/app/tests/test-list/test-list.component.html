@@ -8,9 +8,9 @@
                 <mat-icon>remove</mat-icon>
             </button>
 
-            <mat-form-field class=" example-full-width" appearance="outline">
+            <mat-form-field appearance="outline">
                 <mat-label>N° questões</mat-label>
-                <input type="text" aria-label="Number" matInput [(ngModel)]="questionsCount">
+                <input type="text" aria-label="Number" matInput [(ngModel)]="questionsCount" [disabled]="true">
             </mat-form-field>
 
             <button mat-mini-fab color="accent" (click)="addQuestion()">
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="filters">
-                        <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-form-field appearance="outline">
                             <mat-label>Pergunta</mat-label>
                             <input type="text" placeholder="Escolha um" aria-label="Number" matInput
                                 [formControl]="myControl" [matAutocomplete]="auto">
@@ -51,7 +51,7 @@
 
                         <mat-form-field appearance="outline">
                             <mat-label>Disciplina</mat-label>
-                            <mat-select [(value)]="selected">
+                            <mat-select [(value)]="subcjetSelected">
                                 <mat-option value="option0">None</mat-option>
                                 <mat-option value="option1">História</mat-option>
                                 <mat-option value="option2">Geografia</mat-option>
@@ -59,7 +59,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-form-field appearance="outline">
                             <mat-label>Tema</mat-label>
                             <input type="text" placeholder="Pick one" aria-label="Number" matInput
                                 [formControl]="myControl" [matAutocomplete]="auto">
@@ -72,7 +72,7 @@
 
                         <mat-form-field appearance="outline">
                             <mat-label>Nível</mat-label>
-                            <mat-select [(value)]="selected">
+                            <mat-select [(value)]="levelSelected">
                                 <mat-option value="option0">None</mat-option>
                                 <mat-option value="option1">Fácil</mat-option>
                                 <mat-option value="option2">Médio</mat-option>
@@ -82,7 +82,7 @@
 
                         <mat-form-field appearance="outline">
                             <mat-label>Tipo</mat-label>
-                            <mat-select [(value)]="selected">
+                            <mat-select [(value)]="typeSelected">
                                 <mat-option value="option0">None</mat-option>
                                 <mat-option value="option1">Aberta</mat-option>
                                 <mat-option value="option2">Fechada</mat-option>
