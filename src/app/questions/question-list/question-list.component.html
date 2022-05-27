@@ -22,7 +22,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Disciplina</mat-label>
-        <mat-select [(value)]="selected">
+        <mat-select [(value)]="subcjetSelected">
           <mat-option value="option0">None</mat-option>
           <mat-option value="option1">História</mat-option>
           <mat-option value="option2">Geografia</mat-option>
@@ -43,7 +43,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Nível</mat-label>
-        <mat-select [(value)]="selected">
+        <mat-select [(value)]="levelSelected">
           <mat-option value="option0">None</mat-option>
           <mat-option value="option1">Fácil</mat-option>
           <mat-option value="option2">Médio</mat-option>
@@ -53,7 +53,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Tipo</mat-label>
-        <mat-select [(value)]="selected">
+        <mat-select [(value)]="typeSelected">
           <mat-option value="option0">None</mat-option>
           <mat-option value="option1">Aberta</mat-option>
           <mat-option value="option2">Fechada</mat-option>

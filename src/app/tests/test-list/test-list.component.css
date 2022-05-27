@@ -25,6 +25,11 @@ mat-card {
     justify-content: space-between;
 }
 
+button, mat-mini-fab{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 .arrowbutton {
     float: right;
 }

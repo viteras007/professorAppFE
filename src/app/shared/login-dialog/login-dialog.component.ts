@@ -92,5 +92,5 @@ export class LoginDialogComponent implements OnInit {
  * It has been kept here to keep it as part of shared component.
  */
 export class LoginDialogModel {
-  constructor(public title: string, public message: string) {}
+  constructor(public title: string, public message: string) { }
 }

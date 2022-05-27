@@ -18,9 +18,9 @@ export class UserListComponent implements OnInit {
   levelSelected: string = 'option0';
   typeSelected: string = 'option0';
   questionsCount: number = 0;
-  myControl: FormControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
+  myControl: FormControl = new FormControl();
 
   emitNewQuestion = new EventEmitter<string>();
   static createdNewQuestion = new EventEmitter<string>();

@@ -26,7 +26,7 @@
                 <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Senha</mat-label>
                     <input id="passwordInput" matInput placeholder="Senha" formControlName="password" type="password"
-                        autocomplete="current-password">
+                        autocomplete="current-password" (keyup.enter)="login()">
                     <mat-error id="requiredPasswordError" *ngIf="loginForm.controls['email'].hasError('required')">
                         Senha é
                         <strong>Obrigatório</strong>
@@ -40,7 +40,6 @@
             </mat-card-content>
 
             <mat-card-actions class="login-actions" style="display: flex; justify-content: flex-end;">
-
                 <button mat-button id="resetPassword" (click)="resetPassword()" type="button">Redefinir Senha</button>
             </mat-card-actions>
 

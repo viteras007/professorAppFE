@@ -3,14 +3,14 @@
 
         <h2>Prova</h2>
 
-        <div>
+        <div class="row">
             <button mat-mini-fab color="accent" (click)="removeQuestion()">
                 <mat-icon>remove</mat-icon>
             </button>
 
             <mat-form-field appearance="outline">
                 <mat-label>N° questões</mat-label>
-                <input type="text" aria-label="Number" matInput [(ngModel)]="questionsCount" [disabled]="true">
+                <input type="text" aria-label="Number" matInput [(ngModel)]="questionsCount" readonly>
             </mat-form-field>
 
             <button mat-mini-fab color="accent" (click)="addQuestion()">
