@@ -1,3 +1,4 @@
+import { RequestLogin } from './../../core/models/ResquestLogin';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -18,6 +19,8 @@ export class LoginDialogComponent implements OnInit {
   loginForm: FormGroup;
   loading: boolean;
 
+  public requestLogin: RequestLogin;
+
   constructor(
     private router: Router,
     private titleService: Title,
@@ -34,6 +37,7 @@ export class LoginDialogComponent implements OnInit {
     // this.titleService.setTitle('angular-material-template - Login');
     // this.authenticationService.logout();
     this.createForm();
+    this.requestLogin = new RequestLogin();
   }
   onRegister(): void {
     this.dialogRef.close({ register: true });
@@ -59,26 +63,36 @@ export class LoginDialogComponent implements OnInit {
   }
 
   login() {
-    const email = this.loginForm.get('email').value;
-    const password = this.loginForm.get('password').value;
-    const rememberMe = this.loginForm.get('rememberMe').value;
+    // const email = this.loginForm.get('email').value;
+    // const password = this.loginForm.get('password').value;
+    // const rememberMe = this.loginForm.get('rememberMe').value;
 
-    this.loading = true;
-    this.authenticationService.login(email.toLowerCase(), password).subscribe(
+    // this.loading = true;
+    // this.authenticationService.login(email.toLowerCase(), password).subscribe(
+    //   (data) => {
+    //     if (rememberMe) {
+    //       localStorage.setItem('savedUserEmail', email);
+    //     } else {
+    //       localStorage.removeItem('savedUserEmail');
+    //     }
+    //     this.router.navigate(['/']);
+    //     this.dialogRef.close();
+    //   },
+    //   (error) => {
+    //     this.notificationService.openSnackBar(error.error);
+    //     this.loading = false;
+    //   }
+    // );
+
+
+    this.authenticationService.login(this.requestLogin).subscribe(
       (data) => {
-        if (rememberMe) {
-          localStorage.setItem('savedUserEmail', email);
-        } else {
-          localStorage.removeItem('savedUserEmail');
-        }
-        this.router.navigate(['/']);
-        this.dialogRef.close();
+        console.log(data);
       },
       (error) => {
-        this.notificationService.openSnackBar(error.error);
-        this.loading = false;
+        console.error(error);
       }
-    );
+    )
   }
 
   resetPassword() {

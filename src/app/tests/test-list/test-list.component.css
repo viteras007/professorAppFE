@@ -25,12 +25,12 @@ mat-card {
     justify-content: space-between;
 }
 
-button, mat-mini-fab{
+button, mat-mini-fab {
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.arrowbutton {
+.arrowButton {
     float: right;
 }
 
@@ -38,6 +38,10 @@ button, mat-mini-fab{
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.btnCount {
+    background-color: #6750A4;
 }
 
 @media only screen and (max-width: 1400px) {

@@ -1,3 +1,5 @@
+import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,9 +17,11 @@ import { environment } from '../environments/environment';
     AppComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
+    FormsModule,
     SharedModule,
     CustomMaterialModule.forRoot(),
     AppRoutingModule,
@@ -25,7 +29,7 @@ import { environment } from '../environments/environment';
       serverLoggingUrl: `http://my-api/logs`,
       level: environment.logLevel,
       serverLogLevel: environment.serverLogLevel
-    })
+    }),
   ],
   bootstrap: [AppComponent]
 })

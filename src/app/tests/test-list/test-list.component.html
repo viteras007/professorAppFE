@@ -4,7 +4,7 @@
         <h2>Prova</h2>
 
         <div class="row">
-            <button mat-mini-fab color="accent" (click)="removeQuestion()">
+            <button mat-mini-fab class="btnCount" (click)="removeQuestion()">
                 <mat-icon>remove</mat-icon>
             </button>
 
@@ -13,7 +13,7 @@
                 <input type="text" aria-label="Number" matInput [(ngModel)]="questionsCount" readonly>
             </mat-form-field>
 
-            <button mat-mini-fab color="accent" (click)="addQuestion()">
+            <button mat-mini-fab class="btnCount" (click)="addQuestion()">
                 <mat-icon>add</mat-icon>
             </button>
         </div>
@@ -27,7 +27,7 @@
                                 <td>
                                     <div class="no-records animate">Questão</div>
                                 </td>
-                                <td class="arrowbutton">
+                                <td class="arrowButton">
                                     <!-- Material para animação de ocultação de questão: https://material.angular.io/components/tree/overview -->
                                     <button>
                                         <mat-icon>keyboard_arrow_down</mat-icon>

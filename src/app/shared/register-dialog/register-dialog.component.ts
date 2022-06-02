@@ -37,7 +37,7 @@ export class RegisterDialogComponent implements OnInit {
   }
 
   onLogin(): void {
-    this.dialogRef.close({login: true});
+    this.dialogRef.close({ login: true });
   }
 
   onConfirm(): void {
@@ -61,26 +61,26 @@ export class RegisterDialogComponent implements OnInit {
   }
 
   login() {
-    const email = this.loginForm.get('email').value;
-    const password = this.loginForm.get('password').value;
-    const rememberMe = this.loginForm.get('rememberMe').value;
+    // const email = this.loginForm.get('email').value;
+    // const password = this.loginForm.get('password').value;
+    // const rememberMe = this.loginForm.get('rememberMe').value;
 
-    this.loading = true;
-    this.authenticationService.login(email.toLowerCase(), password).subscribe(
-      (data) => {
-        if (rememberMe) {
-          localStorage.setItem('savedUserEmail', email);
-        } else {
-          localStorage.removeItem('savedUserEmail');
-        }
-        this.router.navigate(['/']);
-        this.dialogRef.close();
-      },
-      (error) => {
-        this.notificationService.openSnackBar(error.error);
-        this.loading = false;
-      }
-    );
+    // this.loading = true;
+    // this.authenticationService.login(email.toLowerCase(), password).subscribe(
+    //   (data) => {
+    //     if (rememberMe) {
+    //       localStorage.setItem('savedUserEmail', email);
+    //     } else {
+    //       localStorage.removeItem('savedUserEmail');
+    //     }
+    //     this.router.navigate(['/']);
+    //     this.dialogRef.close();
+    //   },
+    //   (error) => {
+    //     this.notificationService.openSnackBar(error.error);
+    //     this.loading = false;
+    //   }
+    // );
   }
 
   resetPassword() {
@@ -94,5 +94,5 @@ export class RegisterDialogComponent implements OnInit {
  * It has been kept here to keep it as part of shared component.
  */
 export class RegisterDialogModel {
-  constructor(public title: string, public message: string) {}
+  constructor(public title: string, public message: string) { }
 }

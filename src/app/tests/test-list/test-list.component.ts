@@ -1,3 +1,4 @@
+import { QuestionService } from './../../core/services/question.service';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
@@ -28,10 +29,19 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private logger: NGXLogger,
-    private titleService: Title
+    private titleService: Title,
+    private questionService: QuestionService
   ) { }
 
   ngOnInit() {
+    this.questionService.getQuestions().subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     this.titleService.setTitle('angular-material-template - Users');
     this.logger.log('Users loaded');
     this.filteredOptions = this.myControl.valueChanges.pipe(
