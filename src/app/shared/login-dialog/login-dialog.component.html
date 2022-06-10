@@ -10,8 +10,8 @@
 
                 <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input id="emailInput" matInput placeholder="Email" formControlName="email" autocomplete="email"
-                        type="text" [(ngModel)]="requestLogin.login">
+                    <input id="emailInput" matInput placeholder="E-mail" formControlName="email" type="text"
+                        class="form-control" required>
 
                     <mat-error id="invalidEmailError" *ngIf="loginForm.controls['email'].hasError('email')">
                         Digite um email válido
@@ -26,7 +26,7 @@
                 <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Senha</mat-label>
                     <input id="passwordInput" matInput placeholder="Senha" formControlName="password" type="password"
-                        autocomplete="current-password" (keyup.enter)="login()" [(ngModel)]="requestLogin.password">
+                        (keyup.enter)="onSubmit()" class="form-control" required>
                     <mat-error id="requiredPasswordError" *ngIf="loginForm.controls['email'].hasError('required')">
                         Senha é
                         <strong>Obrigatório</strong>
@@ -54,5 +54,5 @@
 <div mat-dialog-actions style="display: flex; justify-content: space-between;">
     <button mat-raised-button color="primary" (click)="onRegister()">Registrar</button>
     <button mat-raised-button id="login" color="primary" [disabled]="loginForm.invalid || loading"
-        (click)="login()">Login</button>
+        (click)="onSubmit()">Login</button>
 </div>

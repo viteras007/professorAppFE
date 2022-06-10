@@ -3,11 +3,9 @@ import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '
 import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { TimerObservable } from 'rxjs-compat/observable/TimerObservable';
-import { LoginComponent } from 'src/app/auth/login/login.component';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { SpinnerService } from 'src/app/core/services/spinner.service';
-import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { LoginDialogComponent } from 'src/app/shared/login-dialog/login-dialog.component';
 import { RegisterDialogComponent } from 'src/app/shared/register-dialog/register-dialog.component';
 
@@ -18,73 +16,73 @@ import { RegisterDialogComponent } from 'src/app/shared/register-dialog/register
 })
 export class LandingHomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private _mobileQueryListener: () => void;
-    mobileQuery: MediaQueryList;
-    showSpinner: boolean;
-    userName: string;
-    isAdmin: boolean;
+  mobileQuery: MediaQueryList;
+  showSpinner: boolean;
+  userName: string;
+  isAdmin: boolean = false;
 
-    private autoLogoutSubscription: Subscription;
+  private autoLogoutSubscription: Subscription;
 
-    constructor(private changeDetectorRef: ChangeDetectorRef,
-        private media: MediaMatcher,
-        public spinnerService: SpinnerService,
-        private authService: AuthenticationService,
-        private authGuard: AuthGuard,
-        public dialog: MatDialog,
-        ) {
+  constructor(private changeDetectorRef: ChangeDetectorRef,
+    private media: MediaMatcher,
+    public spinnerService: SpinnerService,
+    private authService: AuthenticationService,
+    private authGuard: AuthGuard,
+    public dialog: MatDialog,
+  ) {
 
-        this.mobileQuery = this.media.matchMedia('(max-width: 1000px)');
-        this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-        // tslint:disable-next-line: deprecation
-        this.mobileQuery.addListener(this._mobileQueryListener);
-    }
+    this.mobileQuery = this.media.matchMedia('(max-width: 1000px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    // tslint:disable-next-line: deprecation
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
 
-    ngOnInit(): void {
-        const user = this.authService.getCurrentUser();
+  ngOnInit(): void {
+    const user = this.authService.getCurrentUser();
 
-        this.isAdmin = user.isAdmin;
-        this.userName = user.fullName;
+    // this.isAdmin = user.isAdmin ? user.isAdmin : false;
+    // this.userName = user.fullName;
 
-        // Auto log-out subscription
-        const timer = TimerObservable.create(2000, 5000);
-        this.autoLogoutSubscription = timer.subscribe(t => {
-            this.authGuard.canActivate();
-        });
-    }
+    // Auto log-out subscription
+    const timer = TimerObservable.create(2000, 5000);
+    this.autoLogoutSubscription = timer.subscribe(t => {
+      this.authGuard.canActivate;
+    });
+  }
 
-    ngOnDestroy(): void {
-        // tslint:disable-next-line: deprecation
-        this.mobileQuery.removeListener(this._mobileQueryListener);
-        this.autoLogoutSubscription.unsubscribe();
-    }
+  ngOnDestroy(): void {
+    // tslint:disable-next-line: deprecation
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.autoLogoutSubscription.unsubscribe();
+  }
 
-    ngAfterViewInit(): void {
-        this.changeDetectorRef.detectChanges();
-    }
+  ngAfterViewInit(): void {
+    this.changeDetectorRef.detectChanges();
+  }
 
-    openLogin(): void {
-      const dialogRef = this.dialog.open(LoginDialogComponent, {
-        width: '400px',
-        data: {},
-      });
+  openLogin(): void {
+    const dialogRef = this.dialog.open(LoginDialogComponent, {
+      width: '400px',
+      data: {},
+    });
 
-      dialogRef.afterClosed().subscribe(result => {
-        if (result.register) {
-          this.openRegister();
-        }
-      });
-    }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.register) {
+        this.openRegister();
+      }
+    });
+  }
 
-    openRegister(): void {
-      const dialogRef = this.dialog.open(RegisterDialogComponent, {
-        width: '400px',
-        data: {},
-      });
+  openRegister(): void {
+    const dialogRef = this.dialog.open(RegisterDialogComponent, {
+      width: '400px',
+      data: {},
+    });
 
-      dialogRef.afterClosed().subscribe(result => {
-        if (result.login) {
-          this.openLogin();
-        }
-      });
-    }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.login) {
+        this.openLogin();
+      }
+    });
+  }
 }

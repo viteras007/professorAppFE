@@ -44,7 +44,7 @@ export class LayoutComponent implements OnInit, OnDestroy, AfterViewInit {
         // Auto log-out subscription
         const timer = TimerObservable.create(2000, 5000);
         this.autoLogoutSubscription = timer.subscribe(t => {
-            this.authGuard.canActivate();
+            this.authGuard.canActivate;
         });
     }
 
@@ -52,6 +52,10 @@ export class LayoutComponent implements OnInit, OnDestroy, AfterViewInit {
         // tslint:disable-next-line: deprecation
         this.mobileQuery.removeListener(this._mobileQueryListener);
         this.autoLogoutSubscription.unsubscribe();
+    }
+
+    callLogout() {
+        this.authService.logout();
     }
 
     ngAfterViewInit(): void {

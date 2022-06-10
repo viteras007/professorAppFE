@@ -16,7 +16,6 @@ const appRoutes: Routes = [
     {
         path: 'landing',
         loadChildren: './landing/landing.module#LandingModule',
-        // canActivate: [AuthGuard]
     },
     {
         path: 'questions',
@@ -60,6 +59,5 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes)
     ],
     exports: [RouterModule],
-    providers: []
 })
 export class AppRoutingModule { }

@@ -13,13 +13,15 @@ import { MatDialog } from '@angular/material';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(private authService: AuthenticationService,
+    constructor(
+        private authenticationService: AuthenticationService,
         private router: Router,
-        private dialog: MatDialog) { }
+        private dialog: MatDialog
+    ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        const user = this.authService.getCurrentUser();
+        const user = this.authenticationService.currentUserValue;
 
         if (user && user.token) {
 
@@ -32,7 +34,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 if (err instanceof HttpErrorResponse) {
                     if (err.status === 401) {
                         this.dialog.closeAll();
-                        this.router.navigate(['/auth/login']);
+                        // this.router.navigate(['/auth/login']);
                     }
                 }
             }));

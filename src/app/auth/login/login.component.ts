@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     constructor(private router: Router,
         private titleService: Title,
         private notificationService: NotificationService,
-        private authenticationService: AuthenticationService) {
+        private authService: AuthenticationService) {
     }
 
     ngOnInit() {
@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
         //     .subscribe(arg => this.property = arg);
 
         this.titleService.setTitle('angular-material-template - Login');
-        this.authenticationService.logout();
         this.createForm();
     }
 
@@ -44,29 +43,7 @@ export class LoginComponent implements OnInit {
         });
     }
 
-    login() {
-        // const email = this.loginForm.get('email').value;
-        // const password = this.loginForm.get('password').value;
-        // const rememberMe = this.loginForm.get('rememberMe').value;
-
-        // this.loading = true;
-        // this.authenticationService
-        //     .login(email.toLowerCase(), password)
-        //     .subscribe(
-        //         data => {
-        //             if (rememberMe) {
-        //                 localStorage.setItem('savedUserEmail', email);
-        //             } else {
-        //                 localStorage.removeItem('savedUserEmail');
-        //             }
-        //             this.router.navigate(['/']);
-        //         },
-        //         error => {
-        //             this.notificationService.openSnackBar(error.error);
-        //             this.loading = false;
-        //         }
-        //     );
-    }
+    login() { }
 
     resetPassword() {
         this.router.navigate(['/auth/password-reset-request']);

@@ -1,11 +1,9 @@
-import { RequestLogin } from './../../core/models/ResquestLogin';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-dialog',
@@ -15,40 +13,30 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 export class LoginDialogComponent implements OnInit {
   title: string;
   message: string;
-
   loginForm: FormGroup;
   loading: boolean;
-
-  public requestLogin: RequestLogin;
+  error: string = '';
 
   constructor(
     private router: Router,
-    private titleService: Title,
-    private notificationService: NotificationService,
-    private authenticationService: AuthenticationService,
+    private authService: AuthenticationService,
     public dialogRef: MatDialogRef<LoginDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: LoginDialogModel
   ) {
     this.title = data.title;
     this.message = data.message;
+
+    if (this.authService.currentUserValue) {
+      this.router.navigate(['/']);
+    }
   }
 
   ngOnInit() {
     // this.titleService.setTitle('angular-material-template - Login');
     // this.authenticationService.logout();
     this.createForm();
-    this.requestLogin = new RequestLogin();
-  }
-  onRegister(): void {
-    this.dialogRef.close({ register: true });
-  }
-  onConfirm(): void {
-    this.dialogRef.close(true);
   }
 
-  onDismiss(): void {
-    this.dialogRef.close(false);
-  }
   private createForm() {
     const savedUserEmail = localStorage.getItem('savedUserEmail');
 
@@ -62,42 +50,46 @@ export class LoginDialogComponent implements OnInit {
     });
   }
 
-  login() {
-    // const email = this.loginForm.get('email').value;
-    // const password = this.loginForm.get('password').value;
-    // const rememberMe = this.loginForm.get('rememberMe').value;
+  // convenience getter for easy access to form fields
+  get f() { return this.loginForm.controls; }
 
-    // this.loading = true;
-    // this.authenticationService.login(email.toLowerCase(), password).subscribe(
-    //   (data) => {
-    //     if (rememberMe) {
-    //       localStorage.setItem('savedUserEmail', email);
-    //     } else {
-    //       localStorage.removeItem('savedUserEmail');
-    //     }
-    //     this.router.navigate(['/']);
-    //     this.dialogRef.close();
-    //   },
-    //   (error) => {
-    //     this.notificationService.openSnackBar(error.error);
-    //     this.loading = false;
-    //   }
-    // );
+  onSubmit() {
+    if (this.loginForm.invalid) {
+      return;
+    }
 
+    this.loading = true;
+    this.authService.login(this.f.email.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.data = data;
+          this.router.navigate(['/dashboard']);
+          setTimeout(() => {
+            this.onDismiss();
+          }, 1000);
+        },
+        error => {
+          this.error = error;
+          this.loading = false;
+        });
+  }
 
-    this.authenticationService.login(this.requestLogin).subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        console.error(error);
-      }
-    )
+  onRegister(): void {
+    this.dialogRef.close({ register: true });
+  }
+  onConfirm(): void {
+    this.dialogRef.close(true);
+  }
+
+  onDismiss(): void {
+    this.dialogRef.close(false);
   }
 
   resetPassword() {
     this.router.navigate(['/auth/password-reset-request']);
   }
+
 }
 
 /**

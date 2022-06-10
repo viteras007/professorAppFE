@@ -22,7 +22,7 @@ describe('AuthGuard', () => {
         authService.getCurrentUser.and.returnValue(null);
         const guard = new AuthGuard(router, notificationService, authService);
 
-        const result = guard.canActivate();
+        const result = guard.canActivate;
 
         expect(result).toBe(false);
     });
@@ -31,7 +31,7 @@ describe('AuthGuard', () => {
         authService.getCurrentUser.and.returnValue(null);
         const guard = new AuthGuard(router, notificationService, authService);
 
-        guard.canActivate();
+        guard.canActivate;
 
         expect(router.navigate).toHaveBeenCalledWith(['auth/login']);
     });
@@ -40,7 +40,7 @@ describe('AuthGuard', () => {
         authService.getCurrentUser.and.returnValue(null);
         const guard = new AuthGuard(router, notificationService, authService);
 
-        guard.canActivate();
+        guard.canActivate;
 
         expect(notificationService.openSnackBar).toHaveBeenCalledTimes(0);
     });
@@ -50,7 +50,7 @@ describe('AuthGuard', () => {
         authService.getCurrentUser.and.returnValue(user);
         const guard = new AuthGuard(router, notificationService, authService);
 
-        guard.canActivate();
+        guard.canActivate;
 
         expect(router.navigate).toHaveBeenCalledWith(['auth/login']);
     });
@@ -60,7 +60,7 @@ describe('AuthGuard', () => {
         authService.getCurrentUser.and.returnValue(user);
         const guard = new AuthGuard(router, notificationService, authService);
 
-        guard.canActivate();
+        guard.canActivate;
 
         expect(notificationService.openSnackBar)
             .toHaveBeenCalledWith('Your session has expired');
@@ -71,7 +71,7 @@ describe('AuthGuard', () => {
         authService.getCurrentUser.and.returnValue(user);
         const guard = new AuthGuard(router, notificationService, authService);
 
-        const result = guard.canActivate();
+        const result = guard.canActivate;
 
         expect(result).toBe(true);
     });

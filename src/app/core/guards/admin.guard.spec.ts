@@ -20,7 +20,7 @@ describe('AdminGuard', () => {
         authService.getCurrentUser.and.returnValue(user);
         const guard = new AdminGuard(router, authService);
 
-        const result = guard.canActivate();
+        const result = guard.canActivate;
 
         expect(result).toBe(true);
     });
@@ -29,7 +29,7 @@ describe('AdminGuard', () => {
         authService.getCurrentUser.and.returnValue(null);
         const guard = new AdminGuard(router, authService);
 
-        const result = guard.canActivate();
+        const result = guard.canActivate;
 
         expect(result).toBe(false);
     });
@@ -39,7 +39,7 @@ describe('AdminGuard', () => {
         authService.getCurrentUser.and.returnValue(user);
         const guard = new AdminGuard(router, authService);
 
-        const result = guard.canActivate();
+        const result = guard.canActivate;
 
         expect(result).toBe(false);
     });
@@ -49,7 +49,7 @@ describe('AdminGuard', () => {
         authService.getCurrentUser.and.returnValue(user);
         const guard = new AdminGuard(router, authService);
 
-        guard.canActivate();
+        guard.canActivate;
 
         expect(router.navigate).toHaveBeenCalledWith(['/']);
     });
@@ -58,7 +58,7 @@ describe('AdminGuard', () => {
         authService.getCurrentUser.and.returnValue(null);
         const guard = new AdminGuard(router, authService);
 
-        guard.canActivate();
+        guard.canActivate;
 
         expect(router.navigate).toHaveBeenCalledWith(['/']);
     });
