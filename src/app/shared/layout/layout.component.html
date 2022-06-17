@@ -71,7 +71,8 @@
 
     <!-- <button class="btnLogin" (click)="openLogin()" mat-stroked-button>Login</button> -->
 
-    <a mat-menu-item [routerLink]="['/account/profile']">
+    <a mat-menu-item [routerLink]="">
+      <!-- <a mat-menu-item [routerLink]="['/account/profile']"> -->
       <mat-icon class="iconPerson">person</mat-icon>
       <!-- <span>Account</span> -->
     </a>
@@ -108,10 +109,10 @@
           <p mat-line> Prova </p>
         </a>
 
-        <a mat-list-item [routerLink]="['/account/profile']">
+        <!-- <a mat-list-item [routerLink]="['/account/profile']">
           <mat-icon mat-list-icon>person</mat-icon>
           <p mat-line> Perfil </p>
-        </a>
+        </a> -->
 
         <a mat-list-item [routerLink]="['/landing']" (click)="callLogout()">
           <mat-icon mat-list-icon>exit_to_app</mat-icon>

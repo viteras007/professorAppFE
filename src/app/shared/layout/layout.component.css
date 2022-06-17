@@ -20,11 +20,10 @@
   left: 0;
   right: 0;
 }
+
 .iconPerson {
   color: white;
-    vertical-align: middle;
-    border: 1px solid white;
-    border-radius: 8px;
+  vertical-align: middle;
 }
 
 .navbar-is-mobile .navbar {
@@ -82,15 +81,18 @@ a.mat-list-item.active {
   width: 80px;
   height: 80px;
 }
+
 .imgLanding {
   width: 120px;
   height: 120px;
 }
+
 .content {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .firstText {
   font-size: 48px;
   margin-top: 1em;
@@ -98,14 +100,17 @@ a.mat-list-item.active {
   /* font-family: 'Dosis', sans-serif; */
   font-weight: 800;
 }
+
 .imgTest {
   width: 200px;
   height: 200px;
 }
+
 .imgNotebook {
   width: 250px;
   height: 250px;
 }
+
 .btnComecar {
   background-color: #6750A4;
   color: #FFFFFF;
@@ -114,6 +119,7 @@ a.mat-list-item.active {
   height: 43px;
   border-radius: 33px;
 }
+
 .thirdText {
   display: flex;
   margin-top: 1em;
@@ -124,6 +130,7 @@ a.mat-list-item.active {
   font-weight: lighter;
   font-size: 28px;
 }
+
 .secondText {
   display: flex;
   margin-top: 1em;
@@ -144,6 +151,7 @@ a.mat-list-item.active {
   color: #FFFFFF;
   float: right !important;
 }
+
 .navbar-brand {
   text-decoration: none;
   color: white;

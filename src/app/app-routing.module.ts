@@ -27,11 +27,11 @@ const appRoutes: Routes = [
         loadChildren: './tests/tests.module#UsersModule',
         canActivate: [AuthGuard]
     },
-    {
-        path: 'account',
-        loadChildren: './account/account.module#AccountModule',
-        canActivate: [AuthGuard]
-    },
+    // {
+    //     path: 'account',
+    //     loadChildren: './account/account.module#AccountModule',
+    //     canActivate: [AuthGuard]
+    // },
     {
         path: 'icons',
         loadChildren: './icons/icons.module#IconsModule',

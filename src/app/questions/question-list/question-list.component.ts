@@ -1,3 +1,4 @@
+import { QuestionService } from './../../core/services/question.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -42,20 +43,31 @@ export class CustomerListComponent implements OnInit {
   themeSelected = 'option0';
   levelSelected = 'option0';
   typeSelected = 'option0';
+  questions: Object = [];
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
 
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private logger: NGXLogger,
     private notificationService: NotificationService,
+    private questionService: QuestionService,
     private titleService: Title
   ) { }
 
   ngOnInit() {
+    this.questionService.getQuestions().subscribe(
+      (data) => {
+        console.log(data);
+        this.questions = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     this.titleService.setTitle('angular-material-template - Customers');
     this.logger.log('Customers loaded');
     this.dataSource.sort = this.sort;

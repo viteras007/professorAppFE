@@ -14,15 +14,15 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 export class RegisterDialogComponent implements OnInit {
   title: string;
   message: string;
-
-  loginForm: FormGroup;
+  registerForm: FormGroup;
   loading: boolean;
+  error: string = '';
 
   constructor(
     private router: Router,
     private titleService: Title,
     private notificationService: NotificationService,
-    private authenticationService: AuthenticationService,
+    private authService: AuthenticationService,
     public dialogRef: MatDialogRef<RegisterDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -31,12 +31,10 @@ export class RegisterDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.titleService.setTitle('angular-material-template - Login');
-    // this.authenticationService.logout();
     this.createForm();
   }
 
-  onLogin(): void {
+  onRegister(): void {
     this.dialogRef.close({ login: true });
   }
 
@@ -47,40 +45,42 @@ export class RegisterDialogComponent implements OnInit {
   onDismiss(): void {
     this.dialogRef.close(false);
   }
+
   private createForm() {
     const savedUserEmail = localStorage.getItem('savedUserEmail');
 
-    this.loginForm = new FormGroup({
-      email: new FormControl(savedUserEmail, [
+    this.registerForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      email: new FormControl('', [
         Validators.required,
         Validators.email,
       ]),
       password: new FormControl('', Validators.required),
+      confirmPassword: new FormControl('', Validators.required),
       rememberMe: new FormControl(savedUserEmail !== null),
     });
   }
 
-  login() {
-    // const email = this.loginForm.get('email').value;
-    // const password = this.loginForm.get('password').value;
-    // const rememberMe = this.loginForm.get('rememberMe').value;
+  get f() { return this.registerForm.controls; }
 
-    // this.loading = true;
-    // this.authenticationService.login(email.toLowerCase(), password).subscribe(
-    //   (data) => {
-    //     if (rememberMe) {
-    //       localStorage.setItem('savedUserEmail', email);
-    //     } else {
-    //       localStorage.removeItem('savedUserEmail');
-    //     }
-    //     this.router.navigate(['/']);
-    //     this.dialogRef.close();
-    //   },
-    //   (error) => {
-    //     this.notificationService.openSnackBar(error.error);
-    //     this.loading = false;
-    //   }
-    // );
+  register() {
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.authService.register(this.f.name.value, this.f.email.value, this.f.password.value, this.f.confirmPassword.value)
+      .subscribe(
+        data => {
+          this.data = data;
+          setTimeout(() => {
+            this.onDismiss();
+          }, 1000);
+        },
+        error => {
+          this.error = error;
+          this.loading = false;
+        });
   }
 
   resetPassword() {
