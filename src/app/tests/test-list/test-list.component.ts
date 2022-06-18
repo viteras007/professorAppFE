@@ -5,6 +5,8 @@ import { NGXLogger } from 'ngx-logger';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { jsPDF } from 'jspdf';
+
 
 @Component({
   selector: 'app-test-list',
@@ -44,5 +46,11 @@ export class UserListComponent implements OnInit {
     this.emitNewQuestion.emit(quantity);
     UserListComponent.createdNewQuestion.emit(quantity);
     this.questionsCount = this.questionsquantity.length;
+  }
+
+  gerarPDF() {
+    let documento = new jsPDF();
+    documento.text("Relatório em PDF no Angular", 10, 10);
+    documento.output("dataurlnewwindow");
   }
 }
