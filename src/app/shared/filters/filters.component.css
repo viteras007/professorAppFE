@@ -25,6 +25,11 @@ mat-raised-button {
   color: white;
 }
 
+mat-icon {
+  color: #6750A4;
+  margin-top: 10px;
+}
+
 @media only screen and (max-device-width: 1200px) {
   .filters {
     display: block;

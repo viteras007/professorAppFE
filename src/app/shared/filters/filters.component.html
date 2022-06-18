@@ -11,23 +11,13 @@
     </mat-autocomplete>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Disciplina</mat-label>
-    <mat-select [(value)]="subcjetSelected">
-      <mat-option value="N">Nenhuma</mat-option>
-      <mat-option value="hist">História</mat-option>
-      <mat-option value="geo">Geografia</mat-option>
-      <mat-option value="math">Matemática</mat-option>
-      <mat-option value="chemical">Química</mat-option>
-    </mat-select>
-  </mat-form-field>
 
   <!-- nao temos tema retornando nos GETS por enquanto -->
 
   <!-- <mat-form-field appearance="fill">
     <mat-label>Tema</mat-label>
     <input type="text" placeholder="Escolha uma" aria-label="Number" matInput [formControl]="myControl"
-      [matAutocomplete]="auto">
+    [matAutocomplete]="auto">
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
       <mat-option *ngFor="let question of questions">
         {{question}}
@@ -36,24 +26,37 @@
   </mat-form-field> -->
 
   <mat-form-field appearance="fill">
+    <mat-label>Tipo</mat-label>
+    <mat-select [(ngModel)]="typeSelected">
+      <mat-option value="O">Aberta</mat-option>
+      <mat-option value="C">Fechada</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Disciplina</mat-label>
+    <mat-select [(ngModel)]="subcjetSelected">
+      <mat-option value="hist">História</mat-option>
+      <mat-option value="geo">Geografia</mat-option>
+      <mat-option value="math">Matemática</mat-option>
+      <mat-option value="chemical">Química</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
     <mat-label>Nível</mat-label>
-    <mat-select [(value)]="levelSelected">
-      <mat-option value="N">Nenhuma</mat-option>
+    <mat-select [(ngModel)]="levelSelected">
       <mat-option value="E">Fácil</mat-option>
       <mat-option value="M">Médio</mat-option>
       <mat-option value="H">Díficil</mat-option>
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Tipo</mat-label>
-    <mat-select [(value)]="typeSelected">
-      <mat-option value="N">Nenhuma</mat-option>
-      <mat-option value="O">Aberta</mat-option>
-      <mat-option value="C">Fechada</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <button mat-icon-button (click)="resetFilter()">
+    <mat-icon>history</mat-icon>
+  </button>
 
-
-  <button (click)="clickFilter()">Pesquisar</button>
+  <button mat-icon-button (click)="doSearch()">
+    <mat-icon>search</mat-icon>
+  </button>
 </div>

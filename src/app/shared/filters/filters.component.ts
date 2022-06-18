@@ -7,17 +7,16 @@ import { map, startWith } from 'rxjs/operators';
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
-  styleUrls: ['./filters.component.scss']
+  styleUrls: ['./filters.component.css']
 })
 export class FiltersComponent implements OnInit {
-  askSelected = 'option0';
-  subcjetSelected = 'N';
-  themeSelected = 'option0';
-  levelSelected = 'N';
-  typeSelected = 'option0';
+  askSelected = '';
+  subcjetSelected = '';
+  themeSelected = '';
+  levelSelected = '';
+  typeSelected = '';
   questions: Object = [];
   myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
   query: string = '';
 
@@ -28,20 +27,15 @@ export class FiltersComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value)),
-    );
-  }
+  ngOnInit() { }
 
-  clickFilter() {
+  doSearch() {
     this.query = '';
-    if (this.levelSelected !== 'N') {
+    if (this.levelSelected !== '') {
       this.query = '?level=' + this.levelSelected
     }
 
-    if (this.subcjetSelected !== 'N') {
+    if (this.subcjetSelected !== '') {
       this.query === '' ? this.query = '?subject=' + this.subcjetSelected : this.query += '&subject=' + this.subcjetSelected;
     }
 
@@ -52,10 +46,12 @@ export class FiltersComponent implements OnInit {
     this.doFilter.emit(this.query)
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  resetFilter() {
+    this.askSelected = '';
+    this.subcjetSelected = '';
+    this.themeSelected = '';
+    this.levelSelected = '';
+    this.typeSelected = '';
+    this.doSearch();
   }
-
 }
