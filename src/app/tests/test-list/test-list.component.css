@@ -30,6 +30,10 @@ button, mat-mini-fab {
     margin-right: 10px;
 }
 
+.textQuestion, textarea {
+    width: 700px;
+}
+
 .arrowButton {
     float: right;
 }
@@ -40,8 +44,15 @@ button, mat-mini-fab {
     justify-content: space-between;
 }
 
-.btnCount {
+.float {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.primary {
     background-color: #6750A4;
+    color: white;
 }
 
 @media only screen and (max-width: 1400px) {

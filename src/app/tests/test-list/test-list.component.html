@@ -4,7 +4,7 @@
         <h2>Prova</h2>
 
         <div class="row">
-            <button mat-mini-fab class="btnCount" (click)="removeQuestion()">
+            <button mat-mini-fab class="primary" (click)="removeQuestion()">
                 <mat-icon>remove</mat-icon>
             </button>
 
@@ -13,87 +13,39 @@
                 <input type="text" aria-label="Number" matInput [(ngModel)]="questionsCount" readonly>
             </mat-form-field>
 
-            <button mat-mini-fab class="btnCount" (click)="addQuestion()">
+            <button mat-mini-fab class="primary" (click)="addQuestion()">
                 <mat-icon>add</mat-icon>
             </button>
         </div>
 
-        <div *ngFor="let question of questionsquantity">
-            <mat-card>
-                <mat-card-content>
-                    <div fxLayout="row" fxLayoutAlign="none">
-                        <table>
-                            <tr>
-                                <td>
-                                    <div class="no-records animate">Questão</div>
-                                </td>
-                                <td class="arrowButton">
-                                    <!-- Material para animação de ocultação de questão: https://material.angular.io/components/tree/overview -->
-                                    <button>
-                                        <mat-icon>keyboard_arrow_down</mat-icon>
-                                    </button>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+        <app-filters></app-filters>
 
-                    <div class="filters">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Pergunta</mat-label>
-                            <input type="text" placeholder="Escolha um" aria-label="Number" matInput
-                                [formControl]="myControl" [matAutocomplete]="auto">
-                            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                    {{option}}
-                                </mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
 
-                        <mat-form-field appearance="outline">
-                            <mat-label>Disciplina</mat-label>
-                            <mat-select [(value)]="subcjetSelected">
-                                <mat-option value="option0">None</mat-option>
-                                <mat-option value="option1">História</mat-option>
-                                <mat-option value="option2">Geografia</mat-option>
-                                <mat-option value="option3">Matemática</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+        <div *ngFor="let question of questionsquantity; let i = index">
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <div fxLayout="row" fxLayoutAlign="none">
+                            <mat-panel-title>Questão {{questionsquantity.indexOf(question, i)}}</mat-panel-title>
+                        </div>
+                    </mat-expansion-panel-header>
 
-                        <mat-form-field appearance="outline">
-                            <mat-label>Tema</mat-label>
-                            <input type="text" placeholder="Pick one" aria-label="Number" matInput
-                                [formControl]="myControl" [matAutocomplete]="auto">
-                            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                    {{option}}
-                                </mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
+                    <mat-form-field class="textQuestion" appearance="fill">
+                        <mat-label>Pergunta</mat-label>
+                        <textarea matInput placeholder="Edite sua questão"></textarea>
+                    </mat-form-field>
 
-                        <mat-form-field appearance="outline">
-                            <mat-label>Nível</mat-label>
-                            <mat-select [(value)]="levelSelected">
-                                <mat-option value="option0">None</mat-option>
-                                <mat-option value="option1">Fácil</mat-option>
-                                <mat-option value="option2">Médio</mat-option>
-                                <mat-option value="option3">Díficil</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline">
-                            <mat-label>Tipo</mat-label>
-                            <mat-select [(value)]="typeSelected">
-                                <mat-option value="option0">None</mat-option>
-                                <mat-option value="option1">Aberta</mat-option>
-                                <mat-option value="option2">Fechada</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                </mat-card-content>
-            </mat-card>
+                </mat-expansion-panel>
+            </mat-accordion>
             <br><br>
         </div>
 
-
+        <div mat-dialog-actions align="end" fxFlexAlign="end" class="float">
+            <button mat-raised-button class="primary">
+                <mat-icon>download </mat-icon>
+                <mat-label> Gerar PDF</mat-label>
+            </button>
+        </div>
     </div>
+
 </div>

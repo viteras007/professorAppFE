@@ -1,0 +1,55 @@
+<div class="filters">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Pergunta</mat-label>
+    <input type="text" placeholder="Escolha uma" aria-label="Number" matInput [formControl]="myControl"
+      [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let question of questions">
+        {{question.ask}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Disciplina</mat-label>
+    <mat-select [(value)]="subcjetSelected">
+      <mat-option value="option0">Nenhuma</mat-option>
+      <mat-option value="option1">História</mat-option>
+      <mat-option value="option2">Geografia</mat-option>
+      <mat-option value="option3">Matemática</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- nao temos tema retornando nos GETS por enquanto -->
+
+  <!-- <mat-form-field appearance="fill">
+    <mat-label>Tema</mat-label>
+    <input type="text" placeholder="Escolha uma" aria-label="Number" matInput [formControl]="myControl"
+      [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let question of questions">
+        {{question}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field> -->
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nível</mat-label>
+    <mat-select [(value)]="levelSelected">
+      <mat-option value="option0">Nenhuma</mat-option>
+      <mat-option value="option1">Fácil</mat-option>
+      <mat-option value="option2">Médio</mat-option>
+      <mat-option value="option3">Díficil</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Tipo</mat-label>
+    <mat-select [(value)]="typeSelected">
+      <mat-option value="option0">Nenhuma</mat-option>
+      <mat-option value="option1">Aberta</mat-option>
+      <mat-option value="option2">Fechada</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

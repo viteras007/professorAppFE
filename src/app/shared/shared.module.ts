@@ -1,3 +1,4 @@
+import { FiltersComponent } from './filters/filters.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -25,6 +26,7 @@ import { RegisterDialogComponent } from './register-dialog/register-dialog.compo
     ConfirmDialogComponent,
     LoginDialogComponent,
     RegisterDialogComponent,
+    FiltersComponent,
     ContentPlaceholderAnimationComponent,
     LimitToPipe,
     LocalDatePipe,
@@ -40,6 +42,7 @@ import { RegisterDialogComponent } from './register-dialog/register-dialog.compo
     ConfirmDialogComponent,
     LoginDialogComponent,
     RegisterDialogComponent,
+    FiltersComponent,
     ContentPlaceholderAnimationComponent,
     LocalDatePipe,
     YesNoPipe
@@ -47,7 +50,8 @@ import { RegisterDialogComponent } from './register-dialog/register-dialog.compo
   entryComponents: [
     ConfirmDialogComponent,
     LoginDialogComponent,
-    RegisterDialogComponent
+    RegisterDialogComponent,
+    FiltersComponent
   ]
 })
 export class SharedModule { }

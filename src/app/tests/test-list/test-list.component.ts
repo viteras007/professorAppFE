@@ -12,16 +12,8 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./test-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  askSelected: string = 'option0';
-  subcjetSelected: string = 'option0';
-  themeSelected: string = 'option0';
-  levelSelected: string = 'option0';
-  typeSelected: string = 'option0';
   questionsCount: number = 0;
-  options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<string[]>;
   myControl: FormControl = new FormControl();
-
   emitNewQuestion = new EventEmitter<string>();
   static createdNewQuestion = new EventEmitter<string>();
   questionsquantity: string[] = [];
@@ -32,18 +24,12 @@ export class UserListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.titleService.setTitle('angular-material-template - Users');
-    this.logger.log('Users loaded');
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value)),
-    );
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    // this.titleService.setTitle('angular-material-template - Users');
+    // this.logger.log('Users loaded');
+    // this.filteredOptions = this.myControl.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value)),
+    // );
   }
 
   addQuestion(quantity: string) {

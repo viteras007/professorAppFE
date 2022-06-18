@@ -6,22 +6,27 @@ th.mat-sort-header-sorted {
     color: black;
 }
 
-mat-dialog-actions, align{
+mat-dialog-actions, align {
     justify-content: flex-end;
 }
 
-mat-raised-button{
+mat-raised-button {
     border-radius: 33px;
 }
 
-.filters{
+.filters {
     display: flex;
     justify-content: space-between;
 }
 
+.primary {
+    background-color: #6750A4;
+    color: white;
+}
+
 @media only screen and (max-device-width: 1200px) {
-    .filters{
+    .filters {
         display: block;
         justify-content: space-between;
     }
- }
+}

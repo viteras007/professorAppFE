@@ -1,4 +1,9 @@
-.btn-close{
+.btn-close {
   float: right;
   cursor: pointer;
+}
+
+.primary {
+  background-color: #6750A4;
+  color: white;
 }
