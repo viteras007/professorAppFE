@@ -52,5 +52,6 @@ export class UserListComponent implements OnInit {
     let documento = new jsPDF();
     documento.text("Relatório em PDF no Angular", 10, 10);
     documento.output("dataurlnewwindow");
+    // behavior subject
   }
 }

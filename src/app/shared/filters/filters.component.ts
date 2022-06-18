@@ -1,5 +1,5 @@
 import { QuestionService } from './../../core/services/question.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -11,14 +11,17 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class FiltersComponent implements OnInit {
   askSelected = 'option0';
-  subcjetSelected = 'option0';
+  subcjetSelected = 'N';
   themeSelected = 'option0';
-  levelSelected = 'option0';
+  levelSelected = 'N';
   typeSelected = 'option0';
   questions: Object = [];
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
+  query: string = '';
+
+  @Output() doFilter = new EventEmitter<string>();
 
   constructor(
     private questionService: QuestionService,
@@ -26,19 +29,27 @@ export class FiltersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.questionService.getQuestions().subscribe(
-      (data) => {
-        this.questions = data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
     );
+  }
+
+  clickFilter() {
+    this.query = '';
+    if (this.levelSelected !== 'N') {
+      this.query = '?level=' + this.levelSelected
+    }
+
+    if (this.subcjetSelected !== 'N') {
+      this.query === '' ? this.query = '?subject=' + this.subcjetSelected : this.query += '&subject=' + this.subcjetSelected;
+    }
+
+    // if (this.askSelected !== 'N') {
+    //   this.query === '' ? '?subject=' + this.subcjetSelected : this.query + '&subject=' + this.subcjetSelected;
+    // }
+
+    this.doFilter.emit(this.query)
   }
 
   private _filter(value: string): string[] {

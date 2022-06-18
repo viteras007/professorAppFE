@@ -27,14 +27,7 @@ export class CustomerListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.questionService.getQuestions().subscribe(
-      (data) => {
-        this.questions = data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.getData();
     // this.titleService.setTitle('angular-material-template - Customers');
     // this.logger.log('Customers loaded');
     // this.dataSource.sort = this.sort;
@@ -42,6 +35,18 @@ export class CustomerListComponent implements OnInit {
     //   startWith(''),
     //   map(value => this._filter(value)),
     // );
+  }
+
+  getData(query?: string) {
+    console.log('queryuuuuuuuuuuuuuuu', query)
+    this.questionService.getQuestions(query).subscribe(
+      (data) => {
+        this.questions = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   // private _filter(value: string): string[] {
