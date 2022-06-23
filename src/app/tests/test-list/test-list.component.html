@@ -21,22 +21,58 @@
         <br>
         <br>
 
-        <div *ngFor="let question of questionsquantity; let i = index">
+        <div *ngFor="let questionIterator of questionsquantity; let i = index">
             <mat-accordion>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <div fxLayout="row" fxLayoutAlign="none">
-                            <mat-panel-title>Questão {{questionsquantity.indexOf(question, i)}}</mat-panel-title>
+                            <mat-panel-title>Questão {{questionsquantity.indexOf(questionIterator, i)}}
+                            </mat-panel-title>
                         </div>
                     </mat-expansion-panel-header>
 
-                    <!-- <mat-form-field class="textQuestion" appearance="fill">
-                        <mat-label>Pergunta</mat-label>
-                        <textarea matInput placeholder="Edite sua questão"></textarea>
-                    </mat-form-field> -->
-                    <!-- edição questão predefinida para a v2 -->
+                    <app-filters (doFilter)="getData($event)"></app-filters>
 
-                    <app-filters></app-filters>
+                    <br>
+
+                    <mat-radio-group [(ngModel)]="choice">
+                        <mat-radio-button *ngFor="let question of questions" [value]="question">
+                            <mat-card>
+                                <mat-label>Disciplina: </mat-label>
+                                <span>{{question.subject}}</span>
+                                <br><br>
+
+                                <mat-label>Nível de dificuldade: </mat-label>
+                                <span>{{question.level}}</span>
+                                <br><br>
+
+                                <mat-label>Questão: </mat-label>
+                                <span>{{question.ask}}</span>
+                                <br><br>
+
+                                <mat-label>Alternativas: </mat-label>
+                                <br><br>
+                                <div>
+                                    <span>{{question.alternativeA}}</span>
+                                    <br><br>
+                                    <span>{{question.alternativeB}}</span>
+                                    <br><br>
+                                    <span>{{question.alternativeC}}</span>
+                                    <br><br>
+                                    <span>{{question.alternativeD}}</span>
+                                    <br><br>
+                                    <span>{{question.alternativeE}}</span>
+                                    <br><br>
+                                </div>
+
+                                <mat-label>Resposta: </mat-label>
+                                <span>{{question.answer}}</span>
+                                <br><br>
+
+                            </mat-card>
+                            <br><br>
+                        </mat-radio-button>
+                    </mat-radio-group>
 
                 </mat-expansion-panel>
             </mat-accordion>

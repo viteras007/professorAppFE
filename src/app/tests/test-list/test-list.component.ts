@@ -1,12 +1,24 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { QuestionService } from './../../core/services/question.service';
+import { Component, ElementRef, EventEmitter, OnInit, ViewChild } from '@angular/core';
 
-import { NGXLogger } from 'ngx-logger';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 
+interface EnumChoices {
+  [index: number]: {
+    alternativeA: string,
+    alternativeB: string,
+    alternativeC: string,
+    alternativeD: string,
+    alternativeE: string,
+    answer: string,
+    ask: string,
+    level: string,
+    subject: string,
+    type: string
+  };
+}
 
 @Component({
   selector: 'app-test-list',
@@ -19,19 +31,26 @@ export class UserListComponent implements OnInit {
   emitNewQuestion = new EventEmitter<string>();
   static createdNewQuestion = new EventEmitter<string>();
   questionsquantity: string[] = [];
+  questions: Object = [];
+  choice: any;
+  choiceSelected: string[] = [];
+  // @ViewChild('htmlData') htmlData!: ElementRef;
 
   constructor(
-    private logger: NGXLogger,
-    private titleService: Title,
+    private questionService: QuestionService
   ) { }
 
-  ngOnInit() {
-    // this.titleService.setTitle('angular-material-template - Users');
-    // this.logger.log('Users loaded');
-    // this.filteredOptions = this.myControl.valueChanges.pipe(
-    //   startWith(''),
-    //   map(value => this._filter(value)),
-    // );
+  ngOnInit() { }
+
+  getData(query?: string) {
+    this.questionService.getQuestions(query).subscribe(
+      (data) => {
+        this.questions = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   addQuestion(quantity: string) {
@@ -50,8 +69,19 @@ export class UserListComponent implements OnInit {
 
   gerarPDF() {
     let documento = new jsPDF();
-    documento.text("Relatório em PDF no Angular", 10, 10);
+    documento.text("this.choice", 10, 10);
     documento.output("dataurlnewwindow");
-    // behavior subject
+    // documento.save("PROVA - PROFESSORAPP.pdf");
+
+    // let DATA: any = document.getElementById('htmlData');
+    // html2canvas(DATA).then((canvas) => {
+    //   let fileWidth = 208;
+    //   let fileHeight = (canvas.height * fileWidth) / canvas.width;
+    //   const FILEURI = canvas.toDataURL('image/png');
+    //   let PDF = new jsPDF('p', 'mm', 'a4');
+    //   let position = 0;
+    //   PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+    //   PDF.save('angular-demo.pdf');
+    // });
   }
 }
