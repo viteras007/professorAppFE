@@ -10,7 +10,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>N° questões</mat-label>
-                <input type="text" aria-label="Number" matInput [(ngModel)]="questionsCount" readonly>
+                <input type="text" aria-label="Number" matInput [value]="questionsquantity.length" readonly>
             </mat-form-field>
 
             <button mat-mini-fab class="primary" (click)="addQuestion()">
@@ -21,66 +21,112 @@
         <br>
         <br>
 
-        <div *ngFor="let questionIterator of questionsquantity; let i = index">
-            <mat-accordion>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <div fxLayout="row" fxLayoutAlign="none">
-                            <mat-panel-title>Questão {{questionsquantity.indexOf(questionIterator, i)}}
-                            </mat-panel-title>
-                        </div>
-                    </mat-expansion-panel-header>
-
-                    <app-filters (doFilter)="getData($event)"></app-filters>
-
-                    <br>
-
-                    <mat-radio-group [(ngModel)]="choice">
-                        <mat-radio-button *ngFor="let question of questions" [value]="question">
-                            <mat-card>
-                                <mat-label>Disciplina: </mat-label>
-                                <span>{{question.subject}}</span>
-                                <br><br>
-
-                                <mat-label>Nível de dificuldade: </mat-label>
-                                <span>{{question.level}}</span>
-                                <br><br>
-
-                                <mat-label>Questão: </mat-label>
-                                <span>{{question.ask}}</span>
-                                <br><br>
-
-                                <mat-label>Alternativas: </mat-label>
-                                <br><br>
-                                <div>
-                                    <span>{{question.alternativeA}}</span>
-                                    <br><br>
-                                    <span>{{question.alternativeB}}</span>
-                                    <br><br>
-                                    <span>{{question.alternativeC}}</span>
-                                    <br><br>
-                                    <span>{{question.alternativeD}}</span>
-                                    <br><br>
-                                    <span>{{question.alternativeE}}</span>
-                                    <br><br>
+        <div id="print-section">
+            <div *ngFor="let questionIterator of questionsquantity; let i = index">
+                <div class="print-none" *ngIf="questionIterator?.flagQuestao === false">
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <div fxLayout="row" fxLayoutAlign="none">
+                                    <mat-panel-title>Questão {{questionsquantity.indexOf(questionIterator, i)}}
+                                    </mat-panel-title>
                                 </div>
+                            </mat-expansion-panel-header>
 
-                                <mat-label>Resposta: </mat-label>
-                                <span>{{question.answer}}</span>
-                                <br><br>
+                            <app-filters (doFilter)="getData($event)"></app-filters>
 
-                            </mat-card>
+                            <br>
+
+                            <mat-radio-group [(ngModel)]="choice">
+                                <mat-radio-button *ngFor="let question of questions" [value]="question">
+                                    <mat-card>
+                                        <mat-label>Disciplina: </mat-label>
+                                        <span>{{question.subject}}</span>
+                                        <br><br>
+
+                                        <mat-label>Nível de dificuldade: </mat-label>
+                                        <span>{{question.level}}</span>
+                                        <br><br>
+
+                                        <mat-label>Questão: </mat-label>
+                                        <span>{{question.ask}}</span>
+                                        <br><br>
+
+                                        <mat-label>Alternativas: </mat-label>
+                                        <br><br>
+                                        <div>
+                                            <span>{{question.alternativeA}}</span>
+                                            <br><br>
+                                            <span>{{question.alternativeB}}</span>
+                                            <br><br>
+                                            <span>{{question.alternativeC}}</span>
+                                            <br><br>
+                                            <span>{{question.alternativeD}}</span>
+                                            <br><br>
+                                            <span>{{question.alternativeE}}</span>
+                                            <br><br>
+                                        </div>
+
+                                        <mat-label>Resposta: </mat-label>
+                                        <span>{{question.answer}}</span>
+                                        <br><br>
+                                    </mat-card>
+                                    <br><br>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                            <button mat-raised-button class="primary" (click)="confirmQuestion(i, choice)">
+                                <mat-label> Confirmar</mat-label>
+                            </button>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <br><br>
+                </div>
+                <div *ngIf="questionIterator?.flagQuestao === true">
+                    <mat-card>
+                        <mat-panel-title>
+                            <b>Questão {{questionsquantity.indexOf(questionIterator, i)}}</b>
+                        </mat-panel-title>
+                        <br>
+
+                        <mat-label>Disciplina: </mat-label>
+                        <span>{{questionIterator?.dataQuestao?.subject}}</span>
+                        <br><br>
+
+                        <mat-label>Nível de dificuldade: </mat-label>
+                        <span>{{questionIterator?.dataQuestao?.level}}</span>
+                        <br><br>
+
+                        <mat-label>Questão: </mat-label>
+                        <span>{{questionIterator?.dataQuestao?.ask}}</span>
+                        <br><br>
+
+                        <mat-label>Alternativas: </mat-label>
+                        <br><br>
+                        <div>
+                            <span>{{questionIterator?.dataQuestao?.alternativeA}}</span>
                             <br><br>
-                        </mat-radio-button>
-                    </mat-radio-group>
+                            <span>{{questionIterator?.dataQuestao?.alternativeB}}</span>
+                            <br><br>
+                            <span>{{questionIterator?.dataQuestao?.alternativeC}}</span>
+                            <br><br>
+                            <span>{{questionIterator?.dataQuestao?.alternativeD}}</span>
+                            <br><br>
+                            <span>{{questionIterator?.dataQuestao?.alternativeE}}</span>
+                            <br><br>
+                        </div>
 
-                </mat-expansion-panel>
-            </mat-accordion>
-            <br><br>
+                        <mat-label>Resposta: </mat-label>
+                        <span>{{questionIterator?.dataQuestao?.answer}}</span>
+                        <br><br>
+                    </mat-card>
+                    <br><br>
+                </div>
+            </div>
         </div>
 
         <div mat-dialog-actions align="end" fxFlexAlign="end" class="float">
-            <button mat-raised-button class="primary" (click)="gerarPDF()">
+            <button mat-raised-button class="primary" printTitle="ProfessorApp" [useExistingCss]="true"
+                printSectionId="print-section" ngxPrint>
                 <mat-icon>download </mat-icon>
                 <mat-label> Gerar PDF</mat-label>
             </button>

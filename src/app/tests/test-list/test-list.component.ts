@@ -1,24 +1,8 @@
+import { MatDialog } from '@angular/material';
 import { QuestionService } from './../../core/services/question.service';
-import { Component, ElementRef, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, } from '@angular/core';
 
 import { FormControl } from '@angular/forms';
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
-
-interface EnumChoices {
-  [index: number]: {
-    alternativeA: string,
-    alternativeB: string,
-    alternativeC: string,
-    alternativeD: string,
-    alternativeE: string,
-    answer: string,
-    ask: string,
-    level: string,
-    subject: string,
-    type: string
-  };
-}
 
 @Component({
   selector: 'app-test-list',
@@ -30,13 +14,13 @@ export class UserListComponent implements OnInit {
   myControl: FormControl = new FormControl();
   emitNewQuestion = new EventEmitter<string>();
   static createdNewQuestion = new EventEmitter<string>();
-  questionsquantity: string[] = [];
+  questionsquantity: any = [];
   questions: Object = [];
+  questionsSelected: Object = [];
   choice: any;
-  choiceSelected: string[] = [];
-  // @ViewChild('htmlData') htmlData!: ElementRef;
 
   constructor(
+    public dialog: MatDialog,
     private questionService: QuestionService
   ) { }
 
@@ -53,35 +37,24 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  addQuestion(quantity: string) {
-    this.questionsquantity.push(quantity);
+  addQuestion(quantity) {
+    this.questionsquantity.push({ number: quantity, flagQuestao: false, dataQuestao: null });
     this.emitNewQuestion.emit(quantity);
     UserListComponent.createdNewQuestion.emit(quantity);
-    this.questionsCount = this.questionsquantity.length;
+    this.questionsquantity.number = this.questionsquantity.length;
   }
 
-  removeQuestion(quantity: string) {
+  removeQuestion(quantity) {
     this.questionsquantity.pop();
     this.emitNewQuestion.emit(quantity);
     UserListComponent.createdNewQuestion.emit(quantity);
     this.questionsCount = this.questionsquantity.length;
   }
 
-  gerarPDF() {
-    let documento = new jsPDF();
-    documento.text("this.choice", 10, 10);
-    documento.output("dataurlnewwindow");
-    // documento.save("PROVA - PROFESSORAPP.pdf");
-
-    // let DATA: any = document.getElementById('htmlData');
-    // html2canvas(DATA).then((canvas) => {
-    //   let fileWidth = 208;
-    //   let fileHeight = (canvas.height * fileWidth) / canvas.width;
-    //   const FILEURI = canvas.toDataURL('image/png');
-    //   let PDF = new jsPDF('p', 'mm', 'a4');
-    //   let position = 0;
-    //   PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-    //   PDF.save('angular-demo.pdf');
-    // });
+  confirmQuestion(position, question) {
+    if (question !== undefined) {
+      this.questionsquantity[position].dataQuestao = question;
+      this.questionsquantity[position].flagQuestao = true;
+    }
   }
 }
